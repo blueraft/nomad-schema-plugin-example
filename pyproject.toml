@@ -1,27 +1,25 @@
-[build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
-
-[project]
+[tool.poetry]
 name = 'nomad-schema-plugin-example'
 version = '1.0'
 description = 'An example schema plugin for NOMAD.'
 readme = "README.md"
-authors = [{ name = "The NOMAD Authors" }]
-license = { text = "Apache-2.0" }
-dependencies = [
-    "nomad-lab>=1.2.0"
-]
-
-[project.urls]
+authors =  ["The NOMAD Authors"]
+license = "Apache-2.0" 
 homepage = "https://github.com/nomad-coe/nomad-schema-example-plugin"
 
-[project.optional-dependencies]
-dev = [
-    'ruff>=0.1.7',
-    'pytest'
-]
-    
+[tool.poetry.dependencies]
+python = "^3.9"
+nomad-lab = { version = ">=1.2", source = "mpcdf" }
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.1.7"
+pytest = "^7.4.3"
+
+[[tool.poetry.source]]
+name = "mpcdf"
+url = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple"
+priority = "supplemental"
+
 [tool.ruff]   
 # Exclude a variety of commonly ignored directories.
 exclude = [
@@ -92,9 +90,6 @@ skip-magic-trailing-comma = false
 # Like Black, automatically detect the appropriate line ending.
 line-ending = "auto"
 
-
-[tool.setuptools.packages.find]
-include = ["nomadschemaexample*"]
-
-[tool.setuptools.package-data]
-nomadschemaexample = ['*/nomad_plugin.yaml']
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
